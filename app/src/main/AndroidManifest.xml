@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Androidapplicationcourse"
         tools:targetApi="31">
         <activity
+            android:name=".StudentDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".StudentsListActivity"
             android:exported="true">
             <intent-filter>
