@@ -1,7 +1,6 @@
 package com.example.android_application_course
 
 import android.app.Activity
-import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
