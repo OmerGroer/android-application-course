@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Androidapplicationcourse"
         tools:targetApi="31">
         <activity
+            android:name=".EditStudentActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddNewStudentActivity"
             android:exported="false" />
         <activity

@@ -15,4 +15,8 @@ class Model private constructor() {
     fun add(student: Student) {
         students.add(student)
     }
+
+    fun remove(index: Int) {
+        students.removeAt(index)
+    }
 }
