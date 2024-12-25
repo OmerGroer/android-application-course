@@ -24,6 +24,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="30dp"
         android:text="Name: "
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_details_avatar_image_view" />
 
@@ -34,6 +35,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:text="ID"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_details_name" />
 
@@ -44,6 +46,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:text="Phone"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_details_id" />
 
@@ -54,6 +57,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:text="Address"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_details_phone" />
 
@@ -72,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Checked"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/student_details_check_box"
         app:layout_constraintBaseline_toBaselineOf="@id/student_details_check_box"/>
 

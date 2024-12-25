@@ -27,7 +27,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         if (extras != null) {
             val index = extras.getInt("studentPosition")
 
-            val student = Model.shared.students.get(index)
+            val student = Model.shared.get(index)
 
             val nameField: TextView = findViewById(R.id.student_details_name)
             val idField: TextView = findViewById(R.id.student_details_id)
