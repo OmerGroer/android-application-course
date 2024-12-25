@@ -8,17 +8,11 @@ class Model private constructor() {
         val shared = Model()
     }
 
-    init {
-        for (i in 0..20) {
-            val student = Student(
-                name = "Ben Shapiro $i",
-                id = i.toString(),
-                phone = "054$i",
-                address = "there $i",
-                avatarUrl = "",
-                isChecked = false
-            )
-            students.add(student)
-        }
+    fun get(index: Int): Student {
+        return students.get(index)
+    }
+
+    fun add(student: Student) {
+        students.add(student)
     }
 }

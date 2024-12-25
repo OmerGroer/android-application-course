@@ -1,13 +1,18 @@
 package com.example.android_application_course
 
+import android.app.Activity
+import android.app.ComponentCaller
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -45,14 +50,29 @@ class StudentsListActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
 
         val adapter = StudentsRecyclerAdapter(students)
+
+        val startForResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                adapter.notifyDataSetChanged()
+            }
+        }
+
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(applicationContext, StudentDetailsActivity::class.java)
                 intent.putExtra("studentPosition", position)
-                startActivity(intent)
+                startForResult.launch(intent)
             }
         }
         recyclerView.adapter = adapter
+
+        val addStudentBtn: Button = findViewById(R.id.list_add_student_button)
+        addStudentBtn.setOnClickListener {
+            val intent = Intent(applicationContext, AddNewStudentActivity::class.java)
+            startForResult.launch(intent)
+        }
     }
 
     class StudentViewHolder(
