@@ -85,6 +85,9 @@ class EditStudentActivity : AppCompatActivity() {
 
             deleteButton.setOnClickListener {
                 Model.shared.remove(index)
+
+                Toast.makeText(this, "Deleted successfully", Toast.LENGTH_SHORT).show()
+
                 val intent = Intent()
                 intent.putExtra("isDeleted", true)
                 setResult(RESULT_OK, intent)
