@@ -9,7 +9,7 @@
         android:id="@+id/studentsListFragment"
         android:name="com.example.android_application_course.StudentsListFragment"
         android:label="Students List"
-        tools:layout="@layout/fragment_students_list" >
+        tools:layout="@layout/fragment_students_list">
         <action
             android:id="@+id/action_studentsListFragment_to_addNewStudentFragment"
             app:destination="@id/addNewStudentFragment" />
@@ -33,8 +33,7 @@
         android:id="@+id/addNewStudentFragment"
         android:name="com.example.android_application_course.AddNewStudentFragment"
         android:label="Add New Student"
-        tools:layout="@layout/fragment_add_new_student" >
-    </fragment>
+        tools:layout="@layout/fragment_add_new_student" />
     <fragment
         android:id="@+id/editStudentFragment"
         android:name="com.example.android_application_course.EditStudentFragment"

@@ -1,7 +1,6 @@
 package com.example.android_application_course
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +24,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val navHostFragment: NavHostFragment? = supportFragmentManager.findFragmentById(R.id.main_nav_host) as? NavHostFragment
+        val navHostFragment: NavHostFragment? =
+            supportFragmentManager.findFragmentById(R.id.main_nav_host) as? NavHostFragment
         navController = navHostFragment?.navController
         navController?.let {
             NavigationUI.setupActionBarWithNavController(

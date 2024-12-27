@@ -38,7 +38,10 @@ class StudentsListFragment : Fragment() {
 
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val action = StudentsListFragmentDirections.actionStudentsListFragmentToStudentDetailsFragment(position)
+                val action =
+                    StudentsListFragmentDirections.actionStudentsListFragmentToStudentDetailsFragment(
+                        position
+                    )
                 Navigation.findNavController(view).navigate(action)
             }
         }

@@ -19,7 +19,8 @@ class StudentDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_student_details, container, false)
 
-        val studentPosition = StudentDetailsFragmentArgs.fromBundle(requireArguments()).studentPosition
+        val studentPosition =
+            StudentDetailsFragmentArgs.fromBundle(requireArguments()).studentPosition
         val student = Model.shared.get(studentPosition)
 
         val nameField: TextView = view.findViewById(R.id.student_details_name)
@@ -44,7 +45,11 @@ class StudentDetailsFragment : Fragment() {
 
         val editButton: Button = view.findViewById(R.id.student_details_edit_button)
         editButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(studentPosition))
+            Navigation.createNavigateOnClickListener(
+                StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(
+                    studentPosition
+                )
+            )
         )
 
         return view
