@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/studentsListFragment">
+
+    <fragment
+        android:id="@+id/studentsListFragment"
+        android:name="com.example.android_application_course.StudentsListFragment"
+        android:label="Students List"
+        tools:layout="@layout/fragment_students_list">
+        <action
+            android:id="@+id/action_studentsListFragment_to_addNewStudentFragment"
+            app:destination="@id/addNewStudentFragment" />
+        <action
+            android:id="@+id/action_studentsListFragment_to_studentDetailsFragment"
+            app:destination="@id/studentDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentDetailsFragment"
+        android:name="com.example.android_application_course.StudentDetailsFragment"
+        android:label="Student Details"
+        tools:layout="@layout/fragment_student_details">
+        <argument
+            android:name="studentPosition"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_studentDetailsFragment_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewStudentFragment"
+        android:name="com.example.android_application_course.AddNewStudentFragment"
+        android:label="Add New Student"
+        tools:layout="@layout/fragment_add_new_student" />
+    <fragment
+        android:id="@+id/editStudentFragment"
+        android:name="com.example.android_application_course.EditStudentFragment"
+        android:label="Edit Student"
+        tools:layout="@layout/fragment_edit_student">
+        <argument
+            android:name="studentPosition"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editStudentFragment_to_studentsListFragment"
+            app:popUpTo="@id/studentsListFragment" />
+    </fragment>
+</navigation>
