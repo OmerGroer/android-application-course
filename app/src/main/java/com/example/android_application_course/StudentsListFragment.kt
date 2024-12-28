@@ -2,9 +2,10 @@ package com.example.android_application_course
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,11 @@ interface OnItemClickListener {
 
 class StudentsListFragment : Fragment() {
     var students: MutableList<Student>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +53,11 @@ class StudentsListFragment : Fragment() {
         }
         recyclerView.adapter = adapter
 
-        val addStudentBtn: Button = view.findViewById(R.id.list_add_student_button)
-        addStudentBtn.setOnClickListener(
-            Navigation.createNavigateOnClickListener(StudentsListFragmentDirections.actionStudentsListFragmentToAddNewStudentFragment())
-        )
-
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
