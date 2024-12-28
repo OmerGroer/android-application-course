@@ -6,5 +6,10 @@ data class Student(
     var phone: String,
     var address: String,
     var avatarUrl: String,
-    var isChecked: Boolean
+    var isChecked: Boolean,
+    val birthHour: Int,
+    val birthMinute: Int,
+    val birthDay: Int,
+    val birthMonth: Int,
+    val birthYear: Int
 )
