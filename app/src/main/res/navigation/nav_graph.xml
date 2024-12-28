@@ -45,5 +45,10 @@
         <action
             android:id="@+id/action_editStudentFragment_to_studentsListFragment"
             app:popUpTo="@id/studentsListFragment" />
+        <action
+            android:id="@+id/action_editStudentFragment_to_studentDetailsFragment"
+            app:destination="@id/studentDetailsFragment"
+            app:popUpTo="@id/studentDetailsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

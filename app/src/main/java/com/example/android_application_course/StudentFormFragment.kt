@@ -15,7 +15,12 @@ import com.example.android_application_course.model.Student
 
 private const val STUDENT_POSITION = "studentPosition"
 
+interface OnSaveListener {
+    fun onSave(view: View)
+}
+
 class StudentFormFragment : Fragment(), OnTimeSetListener, OnDateSetListener {
+    private var onSaveListener: OnSaveListener? = null
 
     var saveButton: Button? = null
     var deleteButton: Button? = null
@@ -68,6 +73,11 @@ class StudentFormFragment : Fragment(), OnTimeSetListener, OnDateSetListener {
         }
 
         return view
+    }
+
+    fun setOnSave(listener: OnSaveListener): StudentFormFragment {
+        this.onSaveListener = listener
+        return this
     }
 
     private fun setup(view: View) {
@@ -130,7 +140,11 @@ class StudentFormFragment : Fragment(), OnTimeSetListener, OnDateSetListener {
 
             Model.shared.createOrUpdate(studentPosition, student)
             Toast.makeText(context, "Saved successfully", Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(view).popBackStack()
+            if (onSaveListener != null) {
+                onSaveListener?.onSave(view)
+            } else {
+                Navigation.findNavController(view).popBackStack()
+            }
         }
     }
 
