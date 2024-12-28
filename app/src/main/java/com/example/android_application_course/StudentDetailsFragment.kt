@@ -2,9 +2,11 @@ package com.example.android_application_course
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -12,14 +14,23 @@ import androidx.navigation.Navigation
 import com.example.android_application_course.model.Model
 
 class StudentDetailsFragment : Fragment() {
+    private var view: View? = null
+    private var studentPosition: Int? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_student_details, container, false)
+        this.view = view
 
-        val studentPosition = StudentDetailsFragmentArgs.fromBundle(requireArguments()).studentPosition
-        val student = Model.shared.get(studentPosition)
+        studentPosition = StudentDetailsFragmentArgs.fromBundle(requireArguments()).studentPosition
+        val student = Model.shared.get(studentPosition as Int)
 
         val nameField: TextView = view.findViewById(R.id.student_details_name)
         val idField: TextView = view.findViewById(R.id.student_details_id)
@@ -45,15 +56,21 @@ class StudentDetailsFragment : Fragment() {
             checkedField.text = "Not Checked"
         }
 
-        val editButton: Button = view.findViewById(R.id.student_details_edit_button)
-        editButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(
-                    studentPosition
-                )
-            )
-        )
-
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.edit_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.edit_student_menu) {
+            val action = StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(studentPosition as Int)
+            Navigation.findNavController(view as View).navigate(action)
+            return true
+        }
+
+        return false
     }
 }

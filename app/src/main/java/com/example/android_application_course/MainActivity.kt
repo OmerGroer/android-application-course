@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> navController?.popBackStack()
+            R.id.edit_student_menu -> return false
             else -> navController?.let { NavigationUI.onNavDestinationSelected(item, it) }
         }
         return true
