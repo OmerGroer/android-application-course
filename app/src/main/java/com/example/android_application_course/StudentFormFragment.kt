@@ -1,5 +1,7 @@
 package com.example.android_application_course
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.android_application_course.model.Model
@@ -116,13 +117,17 @@ class StudentFormFragment : Fragment(), OnTimeSetListener, OnDateSetListener {
         val avatarUrl = ""
 
         if (name == "") {
-            Toast.makeText(context, "Please write a Name", Toast.LENGTH_SHORT).show()
+            alert("Please write a Name") { _, _ -> }
         } else if (id == "") {
-            Toast.makeText(context, "Please write an ID", Toast.LENGTH_SHORT).show()
+            alert("Please write a ID") { _, _ -> }
         } else if (phone == "") {
-            Toast.makeText(context, "Please write a Phone", Toast.LENGTH_SHORT).show()
+            alert("Please write a Phone") { _, _ -> }
         } else if (address == "") {
-            Toast.makeText(context, "Please write an Address", Toast.LENGTH_SHORT).show()
+            alert("Please write a Address") { _, _ -> }
+        } else if (birthDay == null) {
+            alert("Please enter a Birth Date") { _, _ -> }
+        } else if (birthHour == null) {
+            alert("Please enter a Birth Time") { _, _ -> }
         } else {
             val student = Student(
                 name = name,
@@ -139,23 +144,33 @@ class StudentFormFragment : Fragment(), OnTimeSetListener, OnDateSetListener {
             )
 
             Model.shared.createOrUpdate(studentPosition, student)
-            Toast.makeText(context, "Saved successfully", Toast.LENGTH_SHORT).show()
-            if (onSaveListener != null) {
-                onSaveListener?.onSave(view)
-            } else {
-                Navigation.findNavController(view).popBackStack()
+            alert("Saved successfully") { _, _ ->
+                if (onSaveListener != null) {
+                    onSaveListener?.onSave(view)
+                } else {
+                    Navigation.findNavController(view).popBackStack()
+                }
             }
         }
     }
 
     private fun onDeleteButton(view: View) {
         Model.shared.remove(studentPosition as Int)
-        Toast.makeText(context, "Deleted successfully", Toast.LENGTH_SHORT).show()
-        Navigation.findNavController(view).popBackStack(R.id.studentsListFragment, false)
+        alert("Deleted successfully") { _, _ ->
+            Navigation.findNavController(view).popBackStack(R.id.studentsListFragment, false)
+        }
     }
 
     private fun onCancelButton(view: View) {
         Navigation.findNavController(view).popBackStack()
+    }
+
+    private fun alert(message: String, listener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(context)
+            .setTitle(message)
+            .setPositiveButton("Ok", listener)
+            .setCancelable(false)
+            .create().show()
     }
 
     companion object {
