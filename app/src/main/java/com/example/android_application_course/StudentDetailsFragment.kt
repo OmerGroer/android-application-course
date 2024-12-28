@@ -31,11 +31,15 @@ class StudentDetailsFragment : Fragment() {
         val addressField: TextView = view.findViewById(R.id.student_details_address)
         checkBoxField = view.findViewById(R.id.student_details_check_box)
         val checkedField: TextView = view.findViewById(R.id.student_details_checked)
+        val birthDateField: TextView = view.findViewById(R.id.student_details_birth_date)
+        val birthTimeField: TextView = view.findViewById(R.id.student_details_birth_time)
 
         nameField.text = "Name: ${student.name}"
         idField.text = "ID: ${student.id}"
         phoneField.text = "Phone: ${student.phone}"
         addressField.text = "Address: ${student.address}"
+        birthDateField.text = "Birth Date: ${dateString(student.birthYear, student.birthMonth, student.birthDay)}"
+        birthTimeField.text = "Birth Time: ${timeString(student.birthHour, student.birthMinute)}"
 
         if (student.isChecked) {
             checkBoxField?.isChecked = true

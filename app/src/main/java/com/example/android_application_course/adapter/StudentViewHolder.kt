@@ -25,7 +25,7 @@ class StudentViewHolder(
 
         studentCheckBox?.apply {
             setOnClickListener {
-                (tag as? Int)?.let { tag ->
+                (tag as? Int)?.let { _ ->
                     student?.isChecked = (it as? CheckBox)?.isChecked ?: false
                 }
             }

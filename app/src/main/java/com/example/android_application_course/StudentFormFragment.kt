@@ -15,7 +15,7 @@ import com.example.android_application_course.model.Student
 
 private const val STUDENT_POSITION = "studentPosition"
 
-class StudentFormFragment : Fragment() {
+class StudentFormFragment : Fragment(), OnTimeSetListener, OnDateSetListener {
 
     var saveButton: Button? = null
     var deleteButton: Button? = null
@@ -25,8 +25,15 @@ class StudentFormFragment : Fragment() {
     var phoneField: EditText? = null
     var addressField: EditText? = null
     var checkBoxField: CheckBox? = null
+    var birthDate: EditText? = null
+    var birthTime: EditText? = null
 
     private var studentPosition: Int? = null
+    private var birthHour: Int? = null
+    private var birthMinute: Int? = null
+    private var birthDay: Int? = null
+    private var birthMonth: Int? = null
+    private var birthYear: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +60,13 @@ class StudentFormFragment : Fragment() {
         cancelButton?.setOnClickListener(::onCancelButton)
         deleteButton?.setOnClickListener(::onDeleteButton)
 
+        birthTime?.setOnClickListener {
+            TimePickerFragment.newInstance(birthHour, birthMinute).setOnTimeSet(this).show(getChildFragmentManager(), "timePicker")
+        }
+        birthDate?.setOnClickListener {
+            DatePickerFragment.newInstance(birthYear, birthMonth, birthDay).setOnDateSet(this).show(getChildFragmentManager(), "datePicker")
+        }
+
         return view
     }
 
@@ -66,6 +80,8 @@ class StudentFormFragment : Fragment() {
         phoneField = view.findViewById(R.id.student_form_phone_edit_text)
         addressField = view.findViewById(R.id.student_form_address_edit_text)
         checkBoxField = view.findViewById(R.id.student_form_check_box)
+        birthDate = view.findViewById(R.id.student_form_birth_date_edit_text)
+        birthTime = view.findViewById(R.id.student_form_birth_time_edit_text)
     }
 
     private fun initiateForm() {
@@ -76,6 +92,9 @@ class StudentFormFragment : Fragment() {
         phoneField?.setText(student.phone)
         addressField?.setText(student.address)
         checkBoxField?.isChecked = student.isChecked
+
+        onTimeSet(student.birthHour, student.birthMinute)
+        onDateSet(student.birthYear, student.birthMonth, student.birthDay)
     }
 
     private fun onSaveButton(view: View) {
@@ -101,7 +120,12 @@ class StudentFormFragment : Fragment() {
                 phone = phone,
                 address = address,
                 avatarUrl = avatarUrl,
-                isChecked = isChecked
+                isChecked = isChecked,
+                birthHour = birthHour as Int,
+                birthMinute = birthMinute as Int,
+                birthDay = birthDay as Int,
+                birthMonth = birthMonth as Int,
+                birthYear = birthYear as Int
             )
 
             Model.shared.createOrUpdate(studentPosition, student)
@@ -129,5 +153,18 @@ class StudentFormFragment : Fragment() {
             }
 
         fun newInstance() = StudentFormFragment()
+    }
+
+    override fun onTimeSet(hourOfDay: Int, minute: Int) {
+        birthHour = hourOfDay
+        birthMinute = minute
+        birthTime?.setText(timeString(hourOfDay, minute))
+    }
+
+    override fun onDateSet(year: Int, month: Int, day: Int) {
+        birthDay = day
+        birthMonth = month
+        birthYear = year
+        birthDate?.setText(dateString(year, month, day))
     }
 }
