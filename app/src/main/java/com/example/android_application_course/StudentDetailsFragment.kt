@@ -12,6 +12,8 @@ import androidx.navigation.Navigation
 import com.example.android_application_course.model.Model
 
 class StudentDetailsFragment : Fragment() {
+    private var studentPosition: Int? = null
+    private var checkBoxField: CheckBox? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,15 +21,15 @@ class StudentDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_student_details, container, false)
 
-        val studentPosition =
-            StudentDetailsFragmentArgs.fromBundle(requireArguments()).studentPosition
+        studentPosition = StudentDetailsFragmentArgs.fromBundle(requireArguments()).studentPosition
+        val studentPosition = studentPosition as Int
         val student = Model.shared.get(studentPosition)
 
         val nameField: TextView = view.findViewById(R.id.student_details_name)
         val idField: TextView = view.findViewById(R.id.student_details_id)
         val phoneField: TextView = view.findViewById(R.id.student_details_phone)
         val addressField: TextView = view.findViewById(R.id.student_details_address)
-        val checkBoxField: CheckBox = view.findViewById(R.id.student_details_check_box)
+        checkBoxField = view.findViewById(R.id.student_details_check_box)
         val checkedField: TextView = view.findViewById(R.id.student_details_checked)
 
         nameField.text = "Name: ${student.name}"
@@ -36,10 +38,10 @@ class StudentDetailsFragment : Fragment() {
         addressField.text = "Address: ${student.address}"
 
         if (student.isChecked) {
-            checkBoxField.isChecked = true
+            checkBoxField?.isChecked = true
             checkedField.text = "Checked"
         } else {
-            checkBoxField.isChecked = false
+            checkBoxField?.isChecked = false
             checkedField.text = "Not Checked"
         }
 
@@ -53,5 +55,10 @@ class StudentDetailsFragment : Fragment() {
         )
 
         return view
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        checkBoxField?.isChecked = Model.shared.get(studentPosition as Int).isChecked
     }
 }

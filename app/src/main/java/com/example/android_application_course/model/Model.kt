@@ -12,11 +12,15 @@ class Model private constructor() {
         return students.get(index)
     }
 
-    fun add(student: Student) {
-        students.add(student)
-    }
-
     fun remove(index: Int) {
         students.removeAt(index)
+    }
+
+    fun createOrUpdate(index: Int?, student: Student) {
+        if (index == null) {
+            students.add(student)
+        } else {
+            students[index] = student
+        }
     }
 }
