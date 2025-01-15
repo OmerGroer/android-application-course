@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/studentsListFragment"
-        android:name="com.example.android_application_course.StudentsListFragment"
+        android:name="com.example.android_application_course.fragments.studentsList.StudentsListFragment"
         android:label="Students List"
         tools:layout="@layout/fragment_students_list">
         <action

@@ -14,8 +14,19 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar" />
+        app:layout_constraintTop_toTopOf="parent"  />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_bar"
+        style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="@id/student_row_image_view"
+        app:layout_constraintEnd_toEndOf="@id/student_row_image_view"
+        app:layout_constraintStart_toStartOf="@id/student_row_image_view"
+        app:layout_constraintTop_toTopOf="@id/student_row_image_view" />
 
     <TextView
         android:id="@+id/student_row_name_text_view"
