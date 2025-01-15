@@ -1,4 +1,4 @@
-package com.example.android_application_course
+package com.example.android_application_course.views
 
 import android.app.Dialog
 import android.app.TimePickerDialog
