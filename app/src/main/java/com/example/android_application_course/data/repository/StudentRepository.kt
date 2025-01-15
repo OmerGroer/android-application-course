@@ -110,6 +110,7 @@ class StudentRepository {
         for (student in students) {
             if (student == null) continue
 
+            imageRepository.deleteLocal(student.id)
             AppLocalDb.getInstance().studentDao().insertAll(student)
             val lastUpdated = student.lastUpdated
             if (lastUpdated != null && lastUpdated > time) {
