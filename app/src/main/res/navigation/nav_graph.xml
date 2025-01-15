@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/studentDetailsFragment"
-        android:name="com.example.android_application_course.StudentDetailsFragment"
+        android:name="com.example.android_application_course.fragments.studentDetails.StudentDetailsFragment"
         android:label="Student Details"
         tools:layout="@layout/fragment_student_details">
         <argument
-            android:name="studentPosition"
-            app:argType="integer" />
+            android:name="studentId"
+            app:argType="string" />
         <action
             android:id="@+id/action_studentDetailsFragment_to_editStudentFragment"
             app:destination="@id/editStudentFragment" />
