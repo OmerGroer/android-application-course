@@ -72,8 +72,22 @@ class StudentRepository {
         return AppLocalDb.getInstance().studentDao().getByIdLiveData(studentId)
     }
 
-    fun getById(studentId: String): Student? {
-        return AppLocalDb.getInstance().studentDao().getById(studentId)
+    suspend fun getById(studentId: String): Student? {
+        var student = AppLocalDb.getInstance().studentDao().getById(studentId)
+
+        if (student == null) {
+            student = db.collection(COLLECTION)
+                .document(studentId)
+                .get()
+                .await().let { document -> document.data?.let { Student.fromJSON(it).apply { id = document.id } } }
+            student?.avatarUrl = imageRepository.downloadAndCacheImage(imageRepository.getImageRemoteUri(studentId), studentId)
+
+            if (student == null) return null
+
+            AppLocalDb.getInstance().studentDao().insertAll(student)
+        }
+
+        return student.apply { avatarUrl = imageRepository.getImagePathById(studentId) }
     }
 
     suspend fun refreshById(studentId: String) {
