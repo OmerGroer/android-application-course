@@ -46,16 +46,11 @@ class MainActivity : AppCompatActivity() {
 
                 previousIsLogged = UserRepository.getInstance().isLogged()
                 navController?.let {
-                    val options = NavOptions.Builder().setLaunchSingleTop(true).setRestoreState(true).setPopUpTo(
-                        it.graph.findStartDestination().id,
-                        inclusive = false,
-                        saveState = true
-                    ).build()
                     if (previousIsLogged == true) {
-                        it.navigate(R.id.studentsListFragment, null, options)
+                        it.navigate(R.id.studentsListFragment)
                         it.graph.setStartDestination(R.id.studentsListFragment)
                     } else {
-                        it.navigate(R.id.loginFragment, null, options)
+                        it.navigate(R.id.loginFragment)
                         it.graph.setStartDestination(R.id.loginFragment)
                     }
                 }
