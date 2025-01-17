@@ -46,8 +46,12 @@ class StudentsListViewModel : ViewModel() {
 
     fun getImageUrl(studentId: String, onCompleted: (imageUrl: String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val imageUrl = StudentRepository.getInstance().getImagePath(studentId)
-            withContext(Dispatchers.Main) { onCompleted(imageUrl) }
+            try {
+                val imageUrl = StudentRepository.getInstance().getImagePath(studentId)
+                withContext(Dispatchers.Main) { onCompleted(imageUrl) }
+            } catch (e: Exception) {
+                Log.e("StudentsList", "Error loading image", e)
+            }
         }
     }
 }
